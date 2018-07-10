@@ -1,0 +1,21 @@
+<header class="navbar-wrapper" ng-controller="TopBarCtrl">
+	<div class="navbar navbar-fixed-top">
+		<div class="container-fluid cl"> 
+			<span class="logo navbar-logo f-l mr-10 hidden-xs">飞鱼小程序</span> 
+			<span class="logo navbar-logo-m f-l mr-10 visible-xs">飞鱼小程序</span> 
+			<span class="logo navbar-slogan f-l mr-10 hidden-xs"></span> 
+			<nav id="Hui-userbar" class="nav navbar-nav navbar-userbar hidden-xs">
+				<ul class="cl">
+					<li class="dropDown dropDown_hover">
+						{{user.name}} <i class="Hui-iconfont">&#xe6d5;</i>
+						<ul class="dropDown-menu menu radius box-shadow">
+							<li><a href="{{$root.webContext}}/center#/userInfo/{{user.id}}">个人信息</a></li>
+							<li><a href="{{$root.webContext}}/center/doLogout">退出</a></li>
+						</ul>
+					</li>
+			    <li id="Hui-msg"> <a href="#" title="消息"><span class="badge badge-danger">1</span><i class="Hui-iconfont" style="font-size:18px">&#xe68a;</i></a> </li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</header>

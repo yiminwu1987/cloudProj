@@ -1,0 +1,286 @@
+<nav class="breadcrumb">
+<i class="Hui-iconfont">&#xe620;</i> 产品管理 <span class="c-gray en">&gt;</span> 产品管理 <span class="c-gray en" ng-show="name != null && name != ''">&gt;</span> {{name}}
+<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" 
+	href="#/productList" title="返回" >
+	<i class="Hui-iconfont"></i> 返回
+</a>
+</nav>
+<div class="page-container">
+	<form class="form form-horizontal" id="infoForm">
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span> 产品名称：</label>
+			<div class="formControls col-xs-6 col-sm-6">
+				<input type="text" class="input-text" placeholder="产品名称" ng-model="product.name"
+				       app-validation="required|maxlength=64"/>
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span> 产品编号：</label>
+			<div class="formControls col-xs-6 col-sm-6">
+				<input type="text" class="input-text" placeholder="产品编号" ng-model="product.codeno"
+				       app-validation="required|maxlength=64"/>
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">描述：</label>
+			<div class="formControls col-xs-6 col-sm-6">
+				<textarea class="textarea" placeholder="描述" ng-model="product.description"
+				          app-validation="maxlength=100"></textarea>			
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span> 价格：</label>
+			<div class="formControls col-xs-6 col-sm-6">
+				<input type="text" class="input-text" placeholder="价格" ng-model="product.price"
+				       app-validation="required|float2|currency"/>
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"> 品牌：</label>
+			<div class="formControls col-xs-6 col-sm-6">
+				<div class="uploader-thum-container">
+				    <div id="filePicker">
+				    	<a class="btn radius {{product.brandid != null ? 'btn-default' : 'btn-primary'}}" href="javascript:;" ng-click="selectBrand();" ng-disabled="product.brandid != null">
+				    		<i class="Hui-iconfont">&#xe600;</i> 添加
+				    	</a>
+				    </div>
+					<div class="tag-select" ng-if="product.brandid != null;">
+						<div class="tag-select-inner">
+							<span class="tag-select-selected-tag" title="{{product.brandName}}">{{product.brandName}}
+								<a class="tag-select-selected-tag-a" href="javascript:void(0);" ng-click="product.brandid = null; product.brandName = '';">
+									<span class="ico ico-select-remove"></span>
+								</a>
+							</span>	
+						</div>
+						
+				    </div>
+					
+				</div>
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"> 分类：</label>
+			<div class="formControls col-xs-6 col-sm-6">
+				<div class="uploader-thum-container">
+				    <div id="filePicker">
+				    	<a class="btn radius {{product.classificationid != null ? 'btn-default' : 'btn-primary'}}" href="javascript:;" ng-click="selectClassification();"
+				    	   ng-disabled="product.classificationid != null">
+				    	   		<i class="Hui-iconfont">&#xe600;</i> 添加
+				    	</a>
+				    </div>
+					<div class="tag-select" ng-if="product.classificationid != null;">
+						<div class="tag-select-inner">
+							<span class="tag-select-selected-tag" title="{{product.classificationName}}">{{product.classificationName}}
+								<a class="tag-select-selected-tag-a" href="javascript:void(0);" ng-click="removeClassification();">
+									<span class="ico ico-select-remove"></span>
+								</a>
+							</span>	
+						</div>
+				    </div>
+				</div>
+			</div>
+		</div>
+		<div class="row cl" ng-if="product.classificationid != null;">
+			<label class="form-label col-xs-4 col-sm-2"></label>
+			<div class="formControls col-xs-6 col-sm-6">
+				<table class="table table-border table-bordered table-bg table-sort dataTable no-footer">
+					<thead>
+						<tr class="text-c">
+							<th width="200">属性名称</th>
+							<th width="100">属性值</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr class="text-c" ng-repeat="a in product.attrList">
+							<td class="text-c" style="vertical-align: middle;">{{a.name}}</td>
+							<td class="f-14 product-brand-manage">
+								<input type="text" ng-model="a.value" style="width: 80%;height: 28px;">
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="row cl" ng-if="product.id != null">
+			<label class="form-label col-xs-4 col-sm-2">其他属性：：</label>
+		    <div class="formControls col-xs-6 col-sm-6">
+				<div class="uploader-thum-container">
+				    <div id="filePicker">
+				    	<a class="btn radius {{product.id == null || product.otherAttrArr.length >= 10 ? 'btn-default' : 'btn-primary'}}" href="javascript:;" ng-click="addOtherAttr();"
+				    	   ng-disabled="product.id == null || product.otherAttrArr.length >= 10">
+				    	   		<i class="Hui-iconfont">&#xe600;</i> 添加
+				    	</a>
+				    	<span style="color:red;">最多可添加十个其他属性字段!</span>
+				    </div>
+				</div>
+			</div>
+	    </div>
+	    <div class="row cl" ng-if="product.id != null">
+			<label class="form-label col-xs-4 col-sm-2"></label>
+			<div class="formControls col-xs-6 col-sm-6">
+				<table class="table table-border table-bordered table-bg table-sort dataTable no-footer">
+					<thead>
+						<tr class="text-c">
+							<th width="200">属性名称</th>
+							<th width="200">属性值</th>
+							<th width="100">操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr class="text-c" ng-repeat="a in product.otherAttrArr">
+							<td class="text-c">{{a.name}}</td>
+							<td class="text-c">{{a.value}}</td>
+							<td class="f-14 product-brand-manage">
+								<a style="text-decoration:none" class="ml-5" ng-click="removeOtherAttr(a);" href="javascript:;" title="删除">
+									<i class="Hui-iconfont">&#xe6e2;</i>
+								</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">缩略图：</label>
+			<div class="formControls col-xs-6 col-sm-6">
+				<div class="rect-uploadimg">                    
+					<div class="rect-uploadimg-noimg" ng-hide="product.imgurl != null && product.imgurl != ''">                        
+						<input id="imgurlInput" type="file" 
+							   accept="image/gif, image/jpeg, image/jpg, image/png, image/webp" 
+							   class="rect-uploadimg-noimg-file" 
+							   ng-disabled="busy" onchange="angular.element(this).scope().upload.uploadImg();"> 
+					    <span class="pro-edit-noimages-add fw-bg "></span> 
+				   </div>                    
+			       <div class="rect-uploadimg-img ng-hide" ng-show="product.imgurl != null && product.imgurl != ''"> 
+			       		<img src="{{$root.webContext}}/upload/{{product.imgurl}}">                        
+			       		<div class="rect-uploadimg-img-hover fw-transition-quick rect-uploadimg-img-hover2">                                                      
+			       		    <a class="rect-uploadimg-img-hover-del " href="javascript:void(0);" 
+			       		       ng-click="upload.removeImg();" title="删除 "> 
+			       		       <span class="pro-ico-delete "></span> 
+			       		    </a>                        
+			       		</div>                    
+			       	</div>                
+			    </div>
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">展示图：</label>
+			<div class="formControls col-xs-6 col-sm-6">
+				<div class="rect-uploadimg">                    
+					<div class="rect-uploadimg-noimg" ng-hide="product.img1url != null && product.img1url != ''">                        
+						<input id="img1urlInput" type="file" 
+							   accept="image/gif, image/jpeg, image/jpg, image/png, image/webp" 
+							   class="rect-uploadimg-noimg-file" 
+							   ng-disabled="busy" onchange="angular.element(this).scope().upload1.uploadImg();"> 
+					    <span class="pro-edit-noimages-add fw-bg "></span> 
+				   </div>                    
+			       <div class="rect-uploadimg-img ng-hide" ng-show="product.img1url != null && product.img1url != ''"> 
+			       		<img src="{{$root.webContext}}/upload/{{product.img1url}}">                        
+			       		<div class="rect-uploadimg-img-hover fw-transition-quick rect-uploadimg-img-hover2">                                                      
+			       		    <a class="rect-uploadimg-img-hover-del " href="javascript:void(0);" 
+			       		       ng-click="upload1.removeImg();" title="删除 "> 
+			       		       <span class="pro-ico-delete "></span> 
+			       		    </a>                        
+			       		</div>                    
+			       	</div>                
+			    </div>
+			    <div class="rect-uploadimg">                    
+					<div class="rect-uploadimg-noimg" ng-hide="product.img2url != null && product.img2url != ''">                        
+						<input id="img2urlInput" type="file" 
+							   accept="image/gif, image/jpeg, image/jpg, image/png, image/webp" 
+							   class="rect-uploadimg-noimg-file" 
+							   ng-disabled="busy" onchange="angular.element(this).scope().upload2.uploadImg();"> 
+					    <span class="pro-edit-noimages-add fw-bg "></span> 
+				   </div>                    
+			       <div class="rect-uploadimg-img ng-hide" ng-show="product.img2url != null && product.img2url != ''"> 
+			       		<img src="{{$root.webContext}}/upload/{{product.img2url}}">                        
+			       		<div class="rect-uploadimg-img-hover fw-transition-quick rect-uploadimg-img-hover2">                                                      
+			       		    <a class="rect-uploadimg-img-hover-del " href="javascript:void(0);" 
+			       		       ng-click="upload2.removeImg();" title="删除 "> 
+			       		       <span class="pro-ico-delete "></span> 
+			       		    </a>                        
+			       		</div>                    
+			       	</div>                
+			    </div>
+			    <div class="rect-uploadimg">                    
+					<div class="rect-uploadimg-noimg" ng-hide="product.img3url != null && product.img3url != ''">                        
+						<input id="img3urlInput" type="file" 
+							   accept="image/gif, image/jpeg, image/jpg, image/png, image/webp" 
+							   class="rect-uploadimg-noimg-file" 
+							   ng-disabled="busy" onchange="angular.element(this).scope().upload3.uploadImg();"> 
+					    <span class="pro-edit-noimages-add fw-bg "></span> 
+				   </div>                    
+			       <div class="rect-uploadimg-img ng-hide" ng-show="product.img3url != null && product.img3url != ''"> 
+			       		<img src="{{$root.webContext}}/upload/{{product.img3url}}">                        
+			       		<div class="rect-uploadimg-img-hover fw-transition-quick rect-uploadimg-img-hover2">                                                      
+			       		    <a class="rect-uploadimg-img-hover-del " href="javascript:void(0);" 
+			       		       ng-click="upload3.removeImg();" title="删除 "> 
+			       		       <span class="pro-ico-delete "></span> 
+			       		    </a>                        
+			       		</div>                    
+			       	</div>                
+			    </div>
+			    <div class="rect-uploadimg">                    
+					<div class="rect-uploadimg-noimg" ng-hide="product.img4url != null && product.img4url != ''">                        
+						<input id="img4urlInput" type="file" 
+							   accept="image/gif, image/jpeg, image/jpg, image/png, image/webp" 
+							   class="rect-uploadimg-noimg-file" 
+							   ng-disabled="busy" onchange="angular.element(this).scope().upload4.uploadImg();"> 
+					    <span class="pro-edit-noimages-add fw-bg "></span> 
+				   </div>                    
+			       <div class="rect-uploadimg-img ng-hide" ng-show="product.img4url != null && product.img4url != ''"> 
+			       		<img src="{{$root.webContext}}/upload/{{product.img4url}}">                        
+			       		<div class="rect-uploadimg-img-hover fw-transition-quick rect-uploadimg-img-hover2">                                                      
+			       		    <a class="rect-uploadimg-img-hover-del " href="javascript:void(0);" 
+			       		       ng-click="upload4.removeImg();" title="删除 "> 
+			       		       <span class="pro-ico-delete "></span> 
+			       		    </a>                        
+			       		</div>                    
+			       	</div>                
+			    </div>
+			    <div class="rect-uploadimg">                    
+					<div class="rect-uploadimg-noimg" ng-hide="product.img5url != null && product.img5url != ''">                        
+						<input id="img5urlInput" type="file" 
+							   accept="image/gif, image/jpeg, image/jpg, image/png, image/webp" 
+							   class="rect-uploadimg-noimg-file" 
+							   ng-disabled="busy" onchange="angular.element(this).scope().upload5.uploadImg();"> 
+					    <span class="pro-edit-noimages-add fw-bg "></span> 
+				   </div>                    
+			       <div class="rect-uploadimg-img ng-hide" ng-show="product.img5url != null && product.img5url != ''"> 
+			       		<img src="{{$root.webContext}}/upload/{{product.img5url}}">                        
+			       		<div class="rect-uploadimg-img-hover fw-transition-quick rect-uploadimg-img-hover2">                                                      
+			       		    <a class="rect-uploadimg-img-hover-del " href="javascript:void(0);" 
+			       		       ng-click="upload5.removeImg();" title="删除 "> 
+			       		       <span class="pro-ico-delete "></span> 
+			       		    </a>                        
+			       		</div>                    
+			       	</div>                
+			    </div>
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2" for="checkbox-1">上架：</label>
+			<div class="formControls col-xs-6 col-sm-6">
+				<div class="check-box">
+					<div class="icheckbox-blue {{product.onsale ? 'checked' : ''}}">
+						<input type="checkbox" ng-click="product.onsale = !product.onsale;" id="checkbox-1" class="checkbox-nomal">
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">详情：</label>
+			<div class="formControls col-xs-8 col-sm-9"> 
+				<script id="editor" type="text/plain" style="width:80%;height:400px;"></script> 
+			</div>
+		</div>
+		<div class="row cl">
+			<div class="col-9 col-offset-2">
+				<input class="btn {{validate() ? 'btn-primary' : 'btn-default'}} radius" type="button" value="&nbsp;&nbsp;保存&nbsp;&nbsp;"
+				       ng-click="save();" ng-disabled="!validate();"/>
+			</div>
+		</div>
+	</form>
+</div>
+<app-loading></app-loading>
+<app-msg></app-msg>  

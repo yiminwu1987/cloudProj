@@ -1,0 +1,88 @@
+<nav class="breadcrumb">
+<i class="Hui-iconfont">&#xe625;</i> 首页布局 <span class="c-gray en">&gt;</span> 布局管理 <span class="c-gray en" ng-show="name != null && name != ''">&gt;</span> {{name}}
+<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" 
+	href="#/layoutList" title="返回" >
+	<i class="Hui-iconfont"></i> 返回
+</a>
+</nav>
+<div class="page-container">
+	<form class="form form-horizontal" id="infoForm">
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span> 布局名称：</label>
+			<div class="formControls col-xs-6 col-sm-6">
+				<input type="text" class="input-text" placeholder="布局名称" ng-model="layout.name"
+				       app-validation="required|maxlength=5"/>
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span> 显示类型：</label>
+			<div class="formControls col-xs-6 col-sm-6">
+				<span class="select-box">
+					<select class="select" ng-model="layout.showtype">
+						<option value="Carousel">图片轮播</option>
+						<option value="Icon">小图标</option>
+						<option value="LayoutGroup">分组显示</option>
+						<option value="Product">产品显示</option>
+					</select>
+				</span>
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">描述：</label>
+			<div class="formControls col-xs-6 col-sm-6">
+				<textarea class="textarea" placeholder="描述" ng-model="layout.description"
+				          app-validation="maxlength=100"></textarea>
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span> 分组：</label>
+			<div class="formControls col-xs-6 col-sm-6">
+				<div class="uploader-thum-container">
+				    <div id="filePicker">
+				    	<a class="btn radius btn-primary" href="javascript:;" ng-click="selectGroup();">
+				    		<i class="Hui-iconfont">&#xe600;</i> 添加
+				    	</a>
+				    </div>
+				</div>
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"></label>
+			<div class="formControls col-xs-6 col-sm-6">
+				<table class="table table-border table-bordered table-bg table-sort dataTable no-footer">
+					<thead>
+						<tr class="text-c">
+							<th width="200">分组名称</th>
+							<th width="120">关联对象</th>
+							<th width="150">展示图</th>
+							<th width="100">操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr class="text-c" ng-repeat="c in layout.groupArr">
+							<td class="text-l">{{c.name}}</td>
+							<td class="text-l">{{c.linktypeDisplay}}</td>
+							<td class="text-l">
+								<img src="{{$root.webContext + '/upload/' + c.imgurl}}" height="60" ng-if="c.imgurl != null && c.imgurl != ''"></img>
+								<span ng-if="c.imgurl == null || c.imgurl == ''">-</span>
+							</td>
+							<td class="f-14 product-brand-manage">
+								<a style="text-decoration:none" class="ml-5" ng-click="removeGroup(c);" href="javascript:;" title="删除">
+									<i class="Hui-iconfont">&#xe6e2;</i>
+								</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="row cl">
+			<div class="col-9 col-offset-2">
+				<input class="btn {{validate() ? 'btn-primary' : 'btn-default'}} radius" type="button" value="&nbsp;&nbsp;保存&nbsp;&nbsp;"
+				       ng-click="save();" ng-disabled="!validate();"/>
+			</div>
+		</div>
+	</form>
+</div>
+<app-loading></app-loading>
+<app-msg></app-msg>  

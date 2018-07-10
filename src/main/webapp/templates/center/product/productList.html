@@ -1,0 +1,20 @@
+<nav class="breadcrumb">
+<i class="Hui-iconfont">&#xe620;</i> 产品管理 <span class="c-gray en">&gt;</span> 产品管理 
+<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" 
+   href="#/productInfo" title="添加" >
+	<i class="Hui-iconfont">&#xe600;</i> 添加
+</a>
+</nav>
+<div class="page-container">
+	<div class="text-l">
+		<form class="Huiform" method="post" action="" target="_self">
+			<input type="text" placeholder="产品名称" class="input-text" style="width:168px" ng-model="criteriaObj.name">
+			<button type="button" class="btn btn-success" ng-click="paginator.reload();">
+				<i class="Hui-iconfont">&#xe683;</i> 查询
+			</button>
+		</form>
+	</div>
+    <app-table></app-table>
+</div>
+<app-loading></app-loading>
+<app-msg></app-msg>   

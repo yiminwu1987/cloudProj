@@ -1,0 +1,12 @@
+<aside class="Hui-aside" ng-controller="MenuCtrl">
+	<div class="menu_dropdown bk_2">
+	   <dl id="{{menu.id}}" ng-repeat="menu in menuList" app-repeatfinish="renderFinish($index, menu,  $last);">
+			<dt class="{{menu.isSelected ? 'selected' : ''}}"><i class="Hui-iconfont {{menu.iconClass}}"></i> {{menu.name}}<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+			<dd style="{{menu.isSelected ? 'display: block;' : 'display: none;'}}">
+				<ul>
+					<li ng-repeat="subMenu in menu.subMenuList" id="subMenu.id"><a href="#/{{subMenu.link}}" class="{{subMenu.isSelected ? 'selectMenu' : ''}}">{{subMenu.name}}</a></li>
+				</ul>
+			</dd>
+		</dl>	
+	</div>
+</aside>

@@ -1,0 +1,56 @@
+<nav class="breadcrumb">
+<i class="Hui-iconfont">&#xe620;</i> 产品管理 <span class="c-gray en">&gt;</span> 品牌管理 <span class="c-gray en" ng-show="name != null && name != ''">&gt;</span> {{name}}
+<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" 
+	href="#/brandList" title="返回" >
+	<i class="Hui-iconfont"></i> 返回
+</a>
+</nav>
+<div class="page-container">
+	<form class="form form-horizontal" id="infoForm">
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span> 品牌名称：</label>
+			<div class="formControls col-xs-6 col-sm-6">
+				<input type="text" class="input-text" placeholder="品牌名称" ng-model="brand.name" 
+				       app-validation="required|maxlength=5"/>
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">LOGO：</label>
+			<div class="formControls col-xs-6 col-sm-6">
+				<div class="rect-uploadimg">                    
+					<div class="rect-uploadimg-noimg" ng-hide="brand.logoimgurl != null && brand.logoimgurl != ''">                        
+						<input id="imgUploadInput" type="file" 
+							   accept="image/gif, image/jpeg, image/jpg, image/png, image/webp" 
+							   class="rect-uploadimg-noimg-file" 
+							   ng-disabled="busy" onchange="angular.element(this).scope().upload.uploadImg();"> 
+					    <span class="pro-edit-noimages-add fw-bg "></span> 
+				   </div>                    
+			       <div class="rect-uploadimg-img ng-hide" ng-show="brand.logoimgurl != null && brand.logoimgurl != ''"> 
+			       		<img src="{{$root.webContext}}/upload/{{brand.logoimgurl}}">                        
+			       		<div class="rect-uploadimg-img-hover fw-transition-quick rect-uploadimg-img-hover2">                                                      
+			       		    <a class="rect-uploadimg-img-hover-del " href="javascript:void(0);" 
+			       		       ng-click="upload.removeImg();" title="删除 "> 
+			       		       <span class="pro-ico-delete "></span> 
+			       		    </a>                        
+			       		</div>                    
+			       	</div>                
+			    </div>
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">描述：</label>
+			<div class="formControls col-xs-6 col-sm-6">
+				<textarea class="textarea" placeholder="描述" ng-model="brand.description"
+				          app-validation="maxlength=100"></textarea>
+			</div>
+		</div>
+		<div class="row cl">
+			<div class="col-9 col-offset-2">
+				<input class="btn {{validate() ? 'btn-primary' : 'btn-default'}} radius" type="button" value="&nbsp;&nbsp;保存&nbsp;&nbsp;"
+				       ng-click="save();" ng-disabled="!validate();"/>
+			</div>
+		</div>
+	</form>
+</div>
+<app-loading></app-loading>
+<app-msg></app-msg>  

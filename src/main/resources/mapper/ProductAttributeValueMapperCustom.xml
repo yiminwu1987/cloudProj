@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yiminwu.mapper.ProductAttributeValueMapperCustom" >
+  <resultMap id="BaseResultMap" type="com.yiminwu.model.ProductAttributeValue" >
+    <id column="ProductId" property="productid" jdbcType="INTEGER" />
+    <id column="AttrId" property="attrid" jdbcType="INTEGER" />
+    <result column="Value" property="value" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ProductId, AttrId, Value
+  </sql>
+  <select id="getListByProductId" resultMap="BaseResultMap" parameterType="java.lang.Long">
+	    select
+	    <include refid="Base_Column_List" />
+	    from product_attr_value 
+	       where ProductId = #{productId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByProductId" parameterType="java.lang.Long">
+	    delete from product_attr_value where ProductId = #{productId,jdbcType=INTEGER}
+   </delete>
+</mapper>

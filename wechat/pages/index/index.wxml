@@ -1,0 +1,83 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="imageSection">
+    <image class="image" src="../../resources/cat.jpg" />
+  </view>
+  <view class="infoSection">
+    <view class="mianSection">
+      <view class="titleSection">笨笨的育儿笔记
+      <text class="iconfont icon-iconfontphone" style="border-radius: 50%;padding: 5px;background-color: #ff6600;color: #fff;margin-left:5px;" bindtap="makePhoneCall"></text>
+      </view>
+      <view class="descriptionSection">努力做一个合格的爸爸</view>
+    </view>
+    <view class="iconSection">
+      <text class="iconfont icon-dianzan iconfont1"></text>
+      <text class="iconfont1" style='padding-left:5px;'>19赞</text>
+    </view>
+    <view class="detailSection">
+      <view class="fieldSection">
+        <text style='font-size:15px;'>姓名：笨笨</text>
+      </view>
+      <view class="fieldSection">
+        <text style='font-size:15px;'>性别：男</text>
+      </view>
+      <view class="fieldSection">
+        <text style='font-size:15px;'>公众号：笨笨的育儿笔记</text>
+      </view>
+      <view class="fieldSection">
+        <text style='font-size:15px;'>爱好：读书、写作、投资、带娃</text>
+      </view>
+      <view class="fieldSection">
+        <text style='font-size:15px;'>带娃成绩：12天背完《三字经》、17天背完《千字文》、15天拍球训练5000次</text>
+      </view>
+    </view>
+    <view class="detailSection">
+      <view style="font-size:8px;"><text class="fontColor">90 </text><text>近期来访</text></view>
+      <view style="font-size:8px;">
+      <image src="../../resources/cat.jpg" style='border-radius:50%;width:25px;height:25px;'></image>
+      <image src="../../resources/cat.jpg" style='border-radius:50%;width:25px;height:25px;'></image>
+      <image src="../../resources/cat.jpg" style='border-radius:50%;width:25px;height:25px;'></image>
+      </view>
+      <view class="line-css"></view>
+      <view class="fieldSection">
+        <text class="iconfont icon-iconfontphone"></text>
+        <text style='font-size:15px;padding-left:10px'>113560253314</text>
+
+      </view>
+      <view class="fieldSection">
+        <text class="iconfont icon-weixin"></text>
+        <text style='font-size:15px;padding-left:10px'>woshiwuyimin</text>
+
+      </view>
+      <view class="fieldSection">
+        <text class="iconfont icon-tubiao209"></text>
+        <text style='font-size:15px;padding-left:10px'>247952521@qq.com</text>
+
+      </view>
+      <view class="fieldSection">
+        <text class="iconfont icon-shoucang"></text>
+        <text style='font-size:15px;padding-left:10px'>育儿</text>
+
+      </view>
+      <view class="fieldSection">
+        <text class="iconfont icon-wxbdingwei"></text>
+        <text style='font-size:15px;padding-left:10px'>中国</text>
+
+      </view>
+      <view class="fieldSection" style='margin-top:10px;'>
+        <button size='mini' style="background-color:#ff6600;color:#fff;" bindtap="saveContact">保存通信录</button>
+      </view>
+    </view>
+    <view class="detailSection">
+      <view class="line-css"></view>
+      <view class="fieldSection" style="margin-left:25px;">
+        <text style='font-size:15px;'>留言</text>
+        <textarea placeholder="请输入您的留言，入选后将显示在留言列表" placeholder-style="color:#c0c0c0;font-size:14px;" class="inputTextArea" show-confirm-bar="true" />
+         <button size='mini' style="background-color:#ff6600;color:#fff;margin-top:5px;right:15%;float:right" bindtap="saveContact">发表</button>
+      </view>
+
+    </view>
+    <view class="spaceSection">
+    </view>
+  </view>
+</view>

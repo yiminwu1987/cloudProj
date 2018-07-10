@@ -1,0 +1,74 @@
+<nav class="breadcrumb">
+<i class="Hui-iconfont">&#xe620;</i> 用户管理 <span class="c-gray en">&gt;</span> 用户管理 <span class="c-gray en" ng-show="name != null && name != ''">&gt;</span> {{name}}
+<a ng-if="$root.isAdminLogin" class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" 
+	href="#/userList" title="返回" >
+	<i class="Hui-iconfont"></i> 返回
+</a>
+</nav>
+<div class="page-container">
+	<form class="form form-horizontal" id="infoForm">
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span> 名称：</label>
+			<div class="formControls col-xs-6 col-sm-6">
+				<input type="text" class="input-text" placeholder="名称" ng-model="user.name" 
+				       app-validation="required|maxlength=20"/>
+			</div>
+		</div>
+		<div class="row cl" ng-if="user.type != 'Admin'">
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span> 手机号码：</label>
+			<div class="formControls col-xs-6 col-sm-6">
+				<input type="text" class="input-text" placeholder="手机号码" ng-model="user.phone" 
+				       app-validation="required"/>
+			</div>
+		</div>
+		<div class="row cl" ng-if="user.id != null">
+			<label class="form-label col-xs-4 col-sm-2"> 编号：</label>
+			<div class="formControls col-xs-6 col-sm-6">
+				{{user.code != null && user.code != '' ? user.code : '-'}}
+			</div>
+		</div>
+		<div class="row cl" ng-if="user.id == null || user.updatePassward">
+			<label class="form-label col-xs-4 col-sm-2"> 密码：</label>
+			<div class="formControls col-xs-6 col-sm-6">
+				<input type="password" class="input-text" placeholder="密码" ng-model="user.passward" 
+				       app-validation="required|maxLength=12"/>
+			</div>
+		</div>
+		<div class="row cl" ng-if="user.id == null || user.updatePassward">
+			<label class="form-label col-xs-4 col-sm-2"> 确定密码：</label>
+			<div class="formControls col-xs-6 col-sm-6">
+				<input type="password" class="input-text" placeholder="确定密码" ng-model="user.passward2" 
+				       app-validation="required|maxLength=12"/>
+			</div>
+		</div>
+		<div class="row cl" ng-if="user.id != null && !user.updatePassward">
+			<label class="form-label col-xs-4 col-sm-2"> 密码：</label>
+			<div class="formControls col-xs-6 col-sm-6">
+				<a class="btn btn-success radius l" href="javascript:;" ng-click="changePassward();">修改密码</a>
+			</div>
+		</div>
+		<div class="row cl" ng-if="user.type != 'Admin'">
+			<label class="form-label col-xs-4 col-sm-2"> 类型：</label>
+			<div class="formControls col-xs-6 col-sm-6">
+				<input type="radio" ng-model="user.type" value="Profile" style="margin-top:0px;"/><span style="padding-right:20px;padding-left: 5px;">个人名片    </span>
+				<input type="radio" ng-model="user.type" value="BrandDisplay" style="margin-top:0px;"/><span style="padding-right:20px;padding-left: 5px;">品牌展示     </span>
+				<input type="radio" ng-model="user.type" value="Mall" style="margin-top:0px;"/><span style="padding-right:20px;padding-left: 5px;">商城     </span>
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">描述：</label>
+			<div class="formControls col-xs-6 col-sm-6">
+				<textarea class="textarea" placeholder="描述" ng-model="user.description"
+				          app-validation="maxlength=100"></textarea>
+			</div>
+		</div>
+		<div class="row cl">
+			<div class="col-9 col-offset-2">
+				<input class="btn {{validate() ? 'btn-primary' : 'btn-default'}} radius" type="button" value="&nbsp;&nbsp;保存&nbsp;&nbsp;"
+				       ng-click="save();" ng-disabled="!validate();"/>
+			</div>
+		</div>
+	</form>
+</div>
+<app-loading></app-loading>
+<app-msg></app-msg>  

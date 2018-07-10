@@ -1,0 +1,137 @@
+<nav class="breadcrumb">
+	<i class="Hui-iconfont">&#xe60c;</i> 内容管理 <span class="c-gray en">&gt;</span> 基本信息
+</nav>
+<div class="page-container">
+	<form class="form form-horizontal" id="infoForm">
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span> 个人头像：</label>
+			<div class="formControls col-xs-6 col-sm-6">
+				<div class="rect-uploadimg">                    
+					<div class="rect-uploadimg-noimg" ng-hide="profile.imgurl != null && profile.imgurl != ''">                        
+						<input id="imgUploadInput" type="file" 
+							   accept="image/gif, image/jpeg, image/jpg, image/png, image/webp" 
+							   class="rect-uploadimg-noimg-file" 
+							   ng-disabled="busy" onchange="angular.element(this).scope().upload.uploadImg();"> 
+					    <span class="pro-edit-noimages-add fw-bg "></span> 
+				   </div>                    
+			       <div class="rect-uploadimg-img ng-hide" ng-show="profile.imgurl != null && profile.imgurl != ''"> 
+			       		<img src="{{$root.webContext}}/upload/{{profile.imgurl}}">                        
+			       		<div class="rect-uploadimg-img-hover fw-transition-quick rect-uploadimg-img-hover2">                                                      
+			       		    <a class="rect-uploadimg-img-hover-del " href="javascript:void(0);" 
+			       		       ng-click="upload.removeImg();" title="删除 "> 
+			       		       <span class="pro-ico-delete "></span> 
+			       		    </a>                        
+			       		</div>                    
+			       	</div>                
+			    </div>
+			    <div style="margin-top: 100px;">
+					<span style="color: #ccc;">个人形象照, 头像居中, 大小建议 900x900px</span>
+				</div>
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span> 姓名：</label>
+			<div class="formControls col-xs-6 col-sm-6">
+				<input type="text" class="input-text" placeholder="输入姓名，1到15个字符，让别人一下子认识你。。。" ng-model="profile.name" 
+				       app-validation="required|maxlength=15"/>
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span> 简要介绍：</label>
+			<div class="formControls col-xs-6 col-sm-6">
+				<input type="text" class="input-text" placeholder="简要介绍自己，附加在姓名后面，1到25个字符，。。。" ng-model="profile.description" 
+				       app-validation="required|maxlength=25"/>
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span> 个人介绍：</label>
+			<div class="formControls col-xs-6 col-sm-6">
+				<textarea class="textarea" placeholder="个人介绍，1到200个字符" ng-model="profile.introduction"
+				          app-validation="required|maxlength=200"></textarea>
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"> 联系电话：</label>
+			<div class="formControls col-xs-6 col-sm-6">
+				<input type="text" class="input-text" placeholder="输入联系电话，可选，留空则不显示" ng-model="profile.phone"
+				       app-validation="maxlength=50|hideCountSpan"/>
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"> 微信号：</label>
+			<div class="formControls col-xs-6 col-sm-6">
+				<input type="text" class="input-text" placeholder="输入微信号，可选，留空则不显示" ng-model="profile.wechatno"
+				       app-validation="maxlength=50|hideCountSpan"/>
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"> 微信二维码：</label>
+			<div class="formControls col-xs-6 col-sm-6">
+				<div class="rect-uploadimg">                    
+					<div class="rect-uploadimg-noimg" ng-hide="profile.qrcodeurl != null && profile.qrcodeurl != ''">                        
+						<input id="imgUploadInput2" type="file" 
+							   accept="image/gif, image/jpeg, image/jpg, image/png, image/webp" 
+							   class="rect-uploadimg-noimg-file" 
+							   ng-disabled="busy" onchange="angular.element(this).scope().upload2.uploadImg();"> 
+					    <span class="pro-edit-noimages-add fw-bg "></span> 
+				   </div>                    
+			       <div class="rect-uploadimg-img ng-hide" ng-show="profile.qrcodeurl != null && profile.qrcodeurl != ''"> 
+			       		<img src="{{$root.webContext}}/upload/{{profile.qrcodeurl}}">                        
+			       		<div class="rect-uploadimg-img-hover fw-transition-quick rect-uploadimg-img-hover2">                                                      
+			       		    <a class="rect-uploadimg-img-hover-del " href="javascript:void(0);" 
+			       		       ng-click="upload2.removeImg();" title="删除 "> 
+			       		       <span class="pro-ico-delete "></span> 
+			       		    </a>                        
+			       		</div>                    
+			       	</div>                
+			    </div>
+			    <div style="margin-top: 100px;">
+					<span style="color: #ccc;">可选，建议个人微信二维码或订阅号二维码</span>
+				</div>
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"> 邮箱：</label>
+			<div class="formControls col-xs-6 col-sm-6">
+				<input type="text" class="input-text" placeholder="输入邮箱，可选，留空则不显示" ng-model="profile.email"
+				       app-validation="maxlength=50|hideCountSpan"/>
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"> 公司：</label>
+			<div class="formControls col-xs-6 col-sm-6">
+				<input type="text" class="input-text" placeholder="输入所属公司，可选，留空则不显示" ng-model="profile.company"
+				       app-validation="maxlength=50|hideCountSpan"/>
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"> 标签：</label>
+			<div class="formControls col-xs-6 col-sm-6">
+				<input type="text" class="input-text" placeholder="最能描述自己的标签, 用空格隔开, 建议 2~5 个" ng-model="profile.tag"
+				       app-validation="maxlength=50|hideCountSpan"/>
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"> 联系地址：</label>
+			<div class="formControls col-xs-6 col-sm-6">
+				<input type="text" class="input-text" placeholder="输入联系地址，可选，留空则不显示" ng-model="profile.address"
+				       app-validation="maxlength=50|hideCountSpan"/>
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"> 分享文案：</label>
+			<div class="formControls col-xs-6 col-sm-6">
+				<input type="text" class="input-text" placeholder="分享给朋友或群时的一句话介绍，可选" ng-model="profile.sharecontent"
+				       app-validation="maxlength=25"/>
+			</div>
+		</div>
+		<div class="row cl">
+			<div class="col-9 col-offset-2">
+				<input class="btn {{validate() ? 'btn-primary' : 'btn-default'}} radius" type="button" value="&nbsp;&nbsp;保存&nbsp;&nbsp;"
+				       ng-click="save();" ng-disabled="!validate();"/>
+			</div>
+		</div>
+	</form>
+</div>
+<app-loading></app-loading>
+<app-msg></app-msg>  

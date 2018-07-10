@@ -1,0 +1,72 @@
+<nav class="breadcrumb">
+<i class="Hui-iconfont">&#xe625;</i> 首页布局 <span class="c-gray en">&gt;</span> 分组管理 <span class="c-gray en" ng-show="name != null && name != ''">&gt;</span> {{name}}
+<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px;"
+	href="#/layoutGroupList" title="返回" >
+	<i class="Hui-iconfont"></i> 返回
+</a>
+<a class="btn btn-danger radius r" style="line-height:1.6em;margin-top:3px;margin-right:5px;" 
+	href="#/layoutGroupItemList/{{layoutGroup.id}}" title="添加关联项" ng-if="showLinkBtn">
+	<i class="Hui-iconfont"></i> 关联{{linktype == 'Product' ? '产品' : (linktype == 'Brand' ? '品牌' : '分类')}}项
+</a>
+</nav>
+<div class="page-container">
+	<form class="form form-horizontal" id="infoForm">
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span> 分组名称：</label>
+			<div class="formControls col-xs-6 col-sm-6">
+				<input type="text" class="input-text" placeholder="分组名称" ng-model="layoutGroup.name"
+				       app-validation="required|maxlength=5"/>
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span> 关联对象：</label>
+			<div class="formControls col-xs-6 col-sm-6">
+				<span class="select-box">
+					<select class="select" ng-model="layoutGroup.linktype">
+						<option value="Product">产品</option>
+						<option value="Classification">分类</option>
+						<option value="Brand">品牌</option>
+					</select>
+				</span>
+			</div>
+		</div>	
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">展示图：</label>
+			<div class="formControls col-xs-6 col-sm-6">
+				<div class="rect-uploadimg">                    
+					<div class="rect-uploadimg-noimg" ng-hide="layoutGroup.imgurl != null && layoutGroup.imgurl != ''">                        
+						<input id="imgurlInput" type="file" 
+							   accept="image/gif, image/jpeg, image/jpg, image/png, image/webp" 
+							   class="rect-uploadimg-noimg-file" 
+							   ng-disabled="busy" onchange="angular.element(this).scope().upload.uploadImg();"> 
+					    <span class="pro-edit-noimages-add fw-bg "></span> 
+				   </div>                    
+			       <div class="rect-uploadimg-img ng-hide" ng-show="layoutGroup.imgurl != null && layoutGroup.imgurl != ''"> 
+			       		<img src="{{$root.webContext}}/upload/{{layoutGroup.imgurl}}">                        
+			       		<div class="rect-uploadimg-img-hover fw-transition-quick rect-uploadimg-img-hover2">                                                      
+			       		    <a class="rect-uploadimg-img-hover-del " href="javascript:void(0);" 
+			       		       ng-click="upload.removeImg();" title="删除 "> 
+			       		       <span class="pro-ico-delete "></span> 
+			       		    </a>                        
+			       		</div>                    
+			       	</div>                
+			    </div>
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">描述：</label>
+			<div class="formControls col-xs-6 col-sm-6">
+				<textarea class="textarea" placeholder="描述" ng-model="layoutGroup.description"
+				          app-validation="maxlength=100"></textarea>
+			</div>
+		</div>
+		<div class="row cl">
+			<div class="col-9 col-offset-2">
+				<input class="btn {{validate() ? 'btn-primary' : 'btn-default'}} radius" type="button" value="&nbsp;&nbsp;保存&nbsp;&nbsp;"
+				       ng-click="save();" ng-disabled="!validate();"/>
+			</div>
+		</div>
+	</form>
+</div>
+<app-loading></app-loading>
+<app-msg></app-msg>  

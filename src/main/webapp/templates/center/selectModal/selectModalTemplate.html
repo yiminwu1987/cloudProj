@@ -1,0 +1,61 @@
+<div class="modal-header">
+    <span class="modal-title">请选择{{displayName}}：</span>
+</div>
+<div class="modal-body">
+	<div style="padding:10px;overflow: auto;height:350px;">
+		<div class="text-l">
+			<form class="Huiform" method="post" action="" target="_self">
+				<input id="searchInputId" type="text" placeholder="分类名称" class="input-text" style="width:168px" ng-model="criteriaObj.name">
+				<button type="button" class="btn btn-success" ng-click="paginator.reload();">
+					<i class="Hui-iconfont">&#xe683;</i> 查询
+				</button>
+			</form>
+		</div>
+	   <div>
+		  <div class="mt-20">
+			<div id="DataTables_Table_0_wrapper" class="dataTables_wrapper no-footer">		
+				<table class="table table-border table-bordered table-bg table-sort dataTable no-footer">
+					<thead>
+						<tr class="text-c">
+							<th width="25">
+								<input type="checkbox" value="all" ng-click="selectAllItemOperation();" ng-checked="isSelectAllItems();" ng-if="isMultiple">
+							</th>
+							<th ng-if="column.sortable" width="{{column.width}}" ng-repeat-start="column in tableCulumn"
+							    class="{{paginator.getSortBy(column.key) == null || paginator.getSortBy(column.key) == '' ? 'sorting' : (paginator.getSortBy(column.key) == 'asc' ? 'sorting_asc' : 'sorting_desc')}}" 
+							    ng-click="paginator.setOrderBy(column.key);">{{column.name}}</th>
+							<th ng-if="!column.sortable" width="{{column.width}}" ng-repeat-end>{{column.name}}</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr class="text-c" ng-repeat="c in paginator.dataList">
+							<td ng-if="isMultiple"><input type="checkbox" ng-click="selectItemOperation(c);" ng-checked="isSelected(c);"></td>
+							<td ng-if="!isMultiple"><input type="radio" ng-click="selectItemOperation(c);" ng-checked="isSelected(c);"></td>
+							<td class="text-l" ng-if="column.type == 'text' || (column.type != 'boolean' && (c[column.key] == null || c[column.key] == ''))" ng-repeat-start="column in tableCulumn">{{c[column.key] == null || c[column.key] == '' ? '-' : c[column.key]}}</td>
+	                        <td class="text-r" ng-if="column.type == 'price'">{{c[column.key] | currency}}</td>
+	                        <td class="text-c" ng-if="column.type == 'boolean'">{{c[column.key] ? '是' : '否'}}</td>
+							<td class="text-l" ng-if="column.type == 'imgUrl' && c[column.key] != null && c[column.key] != ''" ng-repeat-end>
+								<img src="{{$root.webContext + '/upload/' + c[column.key]}}" height="60"></img>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<div class="dataTables_info" id="DataTables_Table_0_info" role="status" aria-live="polite">
+						 共有数据：<strong>{{paginator.getTotalCount()}}</strong> 条
+			    </div>
+				<div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_0_paginate">
+					<a ng-if="paginator.isFirst()" class="paginate_button_disabled previous" id="previous" href="javascript:;">上一页</a>
+					<a ng-if="!paginator.isFirst()" class="paginate_button previous" id="previous" href="javascript:;" ng-click="paginator.loadPrevious();">上一页</a>
+					<span><a class="paginate_button current">{{paginator.getPageNum()}}</a></span>
+					<a ng-if="paginator.isLast()" class="paginate_button_disabled next" id="next" href="javascript:;">下一页</a>
+					<a ng-if="!paginator.isLast()" class="paginate_button next" id="next" href="javascript:;" ng-click="paginator.loadLast();">下一页</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-click="ok()">确认</button>
+    <button class="btn btn-warning" ng-click="cancel()">取消</button>
+</div>
+<app-loading></app-loading>
